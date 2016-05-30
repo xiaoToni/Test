@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<context:component-scan base-package="com.lianlian.mbop" />
+
+	<bean id="mainServerHandler" class="com.lianlian.mbop.io.socket.handler.MainServerHandler">
+		<property name="prefix" value="@@" />
+	</bean>
+
+	<bean id="mainServerAcceptor" class="com.lianlian.mbop.io.socket.MainServerAcceptor">
+		<property name="bufferSize" value="4096" />
+		<property name="decoderMaxLineLength" value="4096" />
+		<property name="maximumPoolSize" value="500" />
+		<property name="ioHandler" ref="mainServerHandler" />
+	</bean>
+
+	<bean id="commandThreadPool" class="com.lianlian.mbop.thread.ThreadPoolFactory" factory-method="newSingleThreadExecutor">
+		<constructor-arg value="command" />
+	</bean>
+
+	<bean id="mainThreadPool" class="com.lianlian.mbop.thread.ThreadPoolFactory" factory-method="newSingleThreadExecutor">
+		<constructor-arg value="main" />
+	</bean>
+
+	<bean id="requestThreadPool" class="com.lianlian.mbop.thread.ThreadPoolFactory" factory-method="newCachedThreadPool">
+		<constructor-arg value="request" />
+	</bean>
+
+	<bean id="responseThreadPool" class="com.lianlian.mbop.thread.ThreadPoolFactory" factory-method="newCachedThreadPool">
+		<constructor-arg value="response" />
+	</bean>
+
+	<bean id="coreThreadPool" class="com.lianlian.mbop.thread.ThreadPoolFactory" factory-method="newCachedThreadPool">
+		<constructor-arg value="core" />
+	</bean>
+
+	<bean id="bizThreadPool" class="com.lianlian.mbop.thread.ThreadPoolFactory" factory-method="newCachedThreadPool">
+		<constructor-arg value="biz" />
+	</bean>
+
+	<util:map id="threadPoolMap" map-class="java.util.HashMap" key-type="java.lang.String" value-type="java.util.concurrent.ExecutorService">
+		<entry key="command" value-ref="commandThreadPool" />
+		<entry key="main" value-ref="mainThreadPool" />
+		<entry key="request" value-ref="requestThreadPool" />
+		<entry key="response" value-ref="responseThreadPool" />
+		<entry key="core" value-ref="coreThreadPool" />
+		<entry key="biz" value-ref="bizThreadPool" />
+	</util:map>
+
+	<bean id="coreMessageQueue" class="com.lianlian.mbop.queue.MessageQueue">
+		<constructor-arg value="2000" />
+	</bean>
+
+	<util:map id="messageQueueMap" map-class="java.util.HashMap" key-type="java.lang.String" value-type="com.lianlian.mbop.queue.MessageQueue">
+		<entry key="core" value-ref="coreMessageQueue" />
+	</util:map>
+
+	<bean id="connectorFactory" class="com.lianlian.mbop.io.socket.NioSocketConnectorFactory">
+		<property name="connectTimeoutInMillis" value="40000" />
+		<property name="writeTimeout" value="20" />
+		<property name="bufferSize" value="4096" />
+		<property name="readIdleTime" value="20" />
+	</bean>
+
+	<bean id="poolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+<<<<<<< .mine
+		<property name="maxTotal" value="100" />
+		<property name="maxIdle" value="16" />
+=======
+		<property name="maxTotal" value="500" />
+		<property name="maxIdle" value="16" />
+>>>>>>> .r95111
+		<property name="timeBetweenEvictionRunsMillis" value="600000" />
+		<property name="minEvictableIdleTimeMillis" value="600000" />
+		<property name="numTestsPerEvictionRun" value="-1" />
+	</bean>
+
+	<bean id="connectorPool" class="com.lianlian.mbop.io.socket.pool.NioSocketConnectorFactoryPool" init-method="init">
+		<property name="poolConfig" ref="poolConfig" />
+		<property name="connectorFactory" ref="connectorFactory" />
+	</bean>
+
+</beans>

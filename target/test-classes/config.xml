@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GBK"?>
+<properties>
+
+	<category name="system">
+		<property name="spring_config_locations" value="classpath:spring/applicationContext.xml" />
+		<property name="package_config_locations" value="template/trade.xml" />
+		<property name="main_server_listen_port" value="18101" />
+		<property name="queue_scan_interval" value="20" />
+		<property name="decoder_max_line_length" value="4096" />
+		<property name="ebs_header_length" value="87" />
+	</category>
+
+	<category name="general">
+		<property name="default_actor_orgcode" value="1" />
+		<property name="default_actor_code" value="admin" />
+		<property name="default_actor_password" value="1BBD886460827015E5D605ED44252251" />
+		<property name="default_actor_type" value="oper" />
+		<property name="3des_key_mbop" value="484345744E41496C4E41991C" />
+		<property name="expire_time" value="15000" />
+		<property name="query_expire_time" value="180000" />
+		<property name="default_wait_time" value="20000" />
+	</category>
+
+	<category name="supplier">
+		<property name="ip" value="127.0.0.1" />
+		<property name="port" value="10001" />
+	</category>
+
+	<category name="notify">
+		<property name="ip" value="10.10.200.6" />
+		<property name="port" value="18060" />
+	</category>
+
+</properties>

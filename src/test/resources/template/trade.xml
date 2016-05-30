@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<templates>
+
+	<template id="exception">
+		<pack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+			</header>
+			<body>
+				<field name="returncode" length="8" type="String" />
+				<field name="returndescription" type="String" />
+			</body>
+		</pack>
+	</template>
+
+	<!-- 吉林联通话费充值 -->
+	<template id="600001">
+		<pack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+			</header>
+			<body>
+				<field name="tradecode" length="6" type="String" default="600001" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="streamid" length="20" type="String" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</body>
+		</pack>
+
+		<unpack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+				<field name="returncode" length="8" type="String" alias="callstatus">
+					<mapping src="10000000" alias="callstatus" target="true" />
+					<mapping src="*" alias="callstatus" target="false" />
+				</field>
+			</header>
+			<body>
+				<field name="returndescription" length="50" type="String" />
+				<field name="extstreamid" length="20" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="merchantid" length="20" type="String" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</body>
+			<exception>
+				<field name="returndescription" length="50" type="String" />
+				<field name="extstreamid" length="20" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="merchantid" length="20" type="String" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</exception>
+		</unpack>
+	</template>
+	
+	
+	<!-- 吉林联通话费充值 -->
+	<template id="600007">
+		<pack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+			</header>
+			<body>
+				<field name="tradecode" length="6" type="String" default="600007" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="streamid" length="20" type="String" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</body>
+		</pack>
+		<unpack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+				<field name="returncode" length="8" type="String" alias="callstatus">
+					<mapping src="10000000" alias="callstatus" target="true" />
+					<mapping src="*" alias="callstatus" target="false" />
+				</field>
+			</header>
+			<body>
+				<field name="returndescription" length="50" type="String" />
+				<field name="extstreamid" length="20" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="merchantid" length="20" type="String" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</body>
+			<exception>
+				<field name="returndescription" length="50" type="String" />
+				<field name="extstreamid" length="20" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="merchantid" length="20" type="String" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</exception>
+		</unpack>
+	</template>
+	
+
+	<!-- 吉林联通话费充值查询 -->
+	<template id="600003">
+		<pack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+			</header>
+			<body>
+				<field name="tradecode" length="6" type="String" default="600003" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="streamid" length="20" type="String" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</body>
+		</pack>
+
+		<unpack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+				<field name="returncode" length="8" type="String" alias="callstatus|status">
+					<mapping src="10000000" alias="callstatus" target="true" />
+					<mapping src="*" alias="callstatus" target="false" />
+					<mapping src="10000000" alias="status" target="0" />
+					<mapping src="99999999" alias="status" target="1" />
+					<mapping src="*" alias="status" target="9" />
+				</field>
+			</header>
+			<body>
+				<field name="returndescription" length="50" type="String" />
+				<field name="extstreamid" length="20" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="merchantid" length="20" type="String" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</body>
+			<exception>
+				<field name="returndescription" length="50" type="String" />
+				<field name="extstreamid" length="20" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="merchantid" length="20" type="String" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="Long" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</exception>
+		</unpack>
+	</template>
+	
+	
+	<!-- 吉林联通与余额 -->
+	<template id="600004">
+		<pack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+			</header>
+			<body>
+				<field name="tradecode" length="6" type="String" default="600004" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</body>
+		</pack>
+
+		<unpack>
+			<header>
+				<field name="bodylength" length="4" type="Long" />
+				<field name="returncode" length="8" type="String" alias="callstatus|status">
+					<mapping src="10000000" alias="callstatus" target="true" />
+					<mapping src="*" alias="callstatus" target="false" />
+					<mapping src="10000000" alias="status" target="0" />
+					<mapping src="99999999" alias="status" target="1" />
+					<mapping src="*" alias="status" target="1" />
+				</field>
+			</header>
+			<body>
+				<field name="returndescription" length="50" type="String" />
+				<field name="extstreamid" length="20" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="merchantid" length="20" type="String" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="String" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</body>
+			<exception>
+				<field name="returndescription" length="50" type="String" />
+				<field name="extstreamid" length="20" type="String" />
+				<field name="streamid" length="20" type="String" />
+				<field name="merchantid" length="20" type="String" />
+				<field name="custcode" length="13" type="String" />
+				<field name="money" length="16" type="String" />
+				<field name="areacode" length="4" type="String" />
+				<field name="opdate" length="14" type="String" />
+			</exception>
+		</unpack>
+	</template>
+
+</templates>
